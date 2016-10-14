@@ -111,7 +111,7 @@ $(document).ready(function() {
     $("#header_container").sticky({ topSpacing: 0 });
     $("#graph_close").css("left", CHART_WIDTH / 2 - 11)
 
-    init(location.origin + "/events?date=" + formatDate(new Date()), new Date());
+    init(location.origin + location.pathname + "events?date=" + formatDate(new Date()), new Date());
 });
 
 function initDialogs() {
@@ -250,7 +250,7 @@ function initCalHeatmap() {
             label: {
                     position: "bottom"
             },
-            data: window.location.origin + "/counts?from={{d:start}}&to={{d:end}}",
+            data: location.origin + location.pathname + "counts?from={{d:start}}&to={{d:end}}",
             highlight: [ "now" ],
             subDomainTitleFormat: {
                 empty: "No events on {date}",
@@ -1529,7 +1529,7 @@ function initDetails() {
                 if (!isLocalAddress(ip)) {
                     if (!(ip in CHECK_IP)) {
                         CHECK_IP[ip] = null;
-                        $.ajax("/check_ip?address=" + ip, { dataType: "jsonp", ip: ip, cell: cell })
+                        $.ajax("check_ip?address=" + ip, { dataType: "jsonp", ip: ip, cell: cell })
                         .done(function(json) {
                             var span_ip = $(json.ipcat.length > 0 ? "<span class='ipcat'></span>" : "<span class='ipcat hidden'></span>").html(json.ipcat);
                             CHECK_IP[this.ip] = json;
