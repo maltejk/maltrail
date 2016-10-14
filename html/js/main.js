@@ -152,7 +152,7 @@ function initDialogs() {
                             alertify.error("Network connection issue");
                         }
                         else {
-                            window.location.href = "/";
+                            window.location.href = location.origin + location.pathname;
                         }
                     }
                 });
@@ -196,7 +196,7 @@ function checkAuthentication() {
                 $("#login_link").html("Log Out (" + _USER + ")");
                 $("#login_link").off("click");
                 $("#login_link").click(function() {
-                    window.location.href = "logout";
+                    window.location.href = location.origin + location.pathname + 'logout';
                 });
             }
             else if (window.location.origin.startsWith('http')) {
